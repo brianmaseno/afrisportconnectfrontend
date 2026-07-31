@@ -1,0 +1,257 @@
+.investment {
+  background:
+    linear-gradient(180deg, rgba(11, 110, 79, 0.07), transparent 40%),
+    var(--paper);
+}
+
+.inv-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.inv-principles {
+  margin-bottom: 40px;
+}
+
+.inv-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inv-pills span {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--green);
+  font: 700 13px var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: rgba(11, 110, 79, 0.06);
+}
+
+.inv-capital {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 56px;
+}
+
+.inv-cap {
+  padding: 26px 20px 26px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 140px;
+}
+
+.inv-cap:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.inv-cap:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.inv-n {
+  display: block;
+  margin-bottom: 12px;
+  font: 700 11px var(--font-display);
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+}
+
+.inv-cap h3 {
+  margin: 0 0 8px;
+  font: 800 17px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.inv-cap p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.45;
+  max-width: 30ch;
+}
+
+.inv-seg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 22px;
+}
+
+.inv-seg-copy {
+  margin: 0;
+  max-width: 40ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.inv-funding {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.inv-fund {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 18px 20px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 100px;
+}
+
+.inv-fund:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.inv-fund:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.inv-fund strong {
+  font: 800 15px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.inv-fund span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.inv-model {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.inv-model-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 18px 22px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 100px;
+}
+
+.inv-model-item:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.inv-model-item:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.inv-model-item strong {
+  font: 800 16px var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--green-deep);
+}
+
+.inv-model-item span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.inv-impact {
+  margin-bottom: 8px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 58ch;
+}
+
+.inv-impact h3 {
+  margin: 0 0 10px;
+  font: 800 22px var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.inv-impact p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.inv-note {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.inv-note strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .inv-capital,
+  .inv-funding,
+  .inv-model {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .inv-cap:nth-child(3n),
+  .inv-fund:nth-child(3n),
+  .inv-model-item:nth-child(3n) {
+    border-right: 1px solid var(--line);
+    padding-right: 18px;
+  }
+
+  .inv-cap:nth-child(2n),
+  .inv-fund:nth-child(2n),
+  .inv-model-item:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .inv-cap:nth-child(2n + 1),
+  .inv-fund:nth-child(2n + 1),
+  .inv-model-item:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .inv-capital,
+  .inv-funding,
+  .inv-model {
+    grid-template-columns: 1fr;
+  }
+
+  .inv-cap,
+  .inv-cap:nth-child(n),
+  .inv-fund,
+  .inv-fund:nth-child(n),
+  .inv-model-item,
+  .inv-model-item:nth-child(n) {
+    border-right: 0;
+    padding: 18px 0;
+    min-height: 0;
+  }
+}

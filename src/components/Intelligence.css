@@ -1,0 +1,145 @@
+.intelligence {
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(0, 184, 217, 0.08), transparent 55%),
+    linear-gradient(180deg, rgba(11, 110, 79, 0.05), transparent 40%),
+    var(--paper);
+}
+
+.intel-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.intel-principles {
+  margin-bottom: 40px;
+}
+
+.intel-pills,
+.intel-cap-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.intel-pills span {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--teal);
+  font: 700 13px var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: rgba(0, 184, 217, 0.08);
+}
+
+.intel-domains {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.intel-domain {
+  padding: 26px 20px 26px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 148px;
+}
+
+.intel-domain:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.intel-domain:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.intel-n {
+  display: block;
+  margin-bottom: 12px;
+  font: 700 11px var(--font-display);
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+}
+
+.intel-domain h3 {
+  margin: 0 0 8px;
+  font: 800 17px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.intel-domain p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.45;
+  max-width: 32ch;
+}
+
+.intel-caps {
+  margin-bottom: 8px;
+}
+
+.intel-cap-pills span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  font: 700 12px var(--font-display);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: rgba(11, 110, 79, 0.06);
+}
+
+.intel-note {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.intel-note strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .intel-domains {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .intel-domain:nth-child(3n) {
+    border-right: 1px solid var(--line);
+    padding-right: 20px;
+  }
+
+  .intel-domain:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .intel-domain:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .intel-domains {
+    grid-template-columns: 1fr;
+  }
+
+  .intel-domain,
+  .intel-domain:nth-child(n) {
+    border-right: 0;
+    padding: 22px 0;
+    min-height: 0;
+  }
+}

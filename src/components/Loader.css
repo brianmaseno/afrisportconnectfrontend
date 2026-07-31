@@ -1,0 +1,132 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 30px;
+  background:
+    radial-gradient(760px 520px at 50% 38%, rgba(20, 160, 110, 0.22), transparent 62%),
+    radial-gradient(900px 620px at 50% 42%, #12304f 0%, #0b1f3a 52%, #06101f 100%);
+  transition:
+    opacity 0.7s var(--ease),
+    visibility 0.7s var(--ease),
+    clip-path 0.9s var(--ease);
+  overflow: hidden;
+}
+
+.loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Slow drifting glow behind the mark */
+.loader-glow {
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.16), transparent 62%);
+  animation: drift 9s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+.loader-core {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 260px;
+  height: 260px;
+}
+
+/* Two expanding rings, like a stadium light pulse */
+.loader-ring span {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  animation: pulse-ring 2.8s var(--ease-in-out) infinite;
+}
+
+.loader-ring span:last-child {
+  animation-delay: 1.4s;
+  border-color: rgba(20, 160, 110, 0.42);
+}
+
+.loader-logo {
+  position: relative;
+  width: 168px;
+  animation: float-y 4.2s var(--ease-in-out) infinite;
+  filter: drop-shadow(0 12px 34px rgba(168, 132, 42, 0.4));
+}
+
+/* Progress meter */
+.loader-meter {
+  width: 208px;
+  height: 2px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.loader-meter span {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  transform-origin: left;
+  transform: scaleX(0.08);
+  background: linear-gradient(90deg, var(--green-bright), var(--gold-soft), var(--gold));
+  transition: transform 0.35s var(--ease);
+}
+
+.loader-caption {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(232, 201, 106, 0.78);
+}
+
+.loader-dots::after {
+  content: "";
+  animation: loaderDots 1.6s steps(4, end) infinite;
+}
+
+@keyframes loaderDots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
+
+@media (max-width: 600px) {
+  .loader-core {
+    width: 200px;
+    height: 200px;
+  }
+
+  .loader-logo {
+    width: 132px;
+  }
+
+  .loader-ring span {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-glow,
+  .loader-logo,
+  .loader-ring span,
+  .loader-dots::after {
+    animation: none;
+  }
+}

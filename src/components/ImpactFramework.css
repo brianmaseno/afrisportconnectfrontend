@@ -1,0 +1,239 @@
+.impact-fw {
+  background:
+    linear-gradient(180deg, rgba(212, 175, 55, 0.08), transparent 36%),
+    var(--paper);
+  border-top: 1px solid var(--line);
+}
+
+.if-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.if-principles {
+  margin-bottom: 40px;
+}
+
+.if-pills,
+.if-kpi-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.if-pills span {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--gold, #d4af37);
+  font: 700 13px var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.if-seg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 22px;
+}
+
+.if-seg-copy {
+  margin: 0;
+  max-width: 40ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.if-chain {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.if-step {
+  padding: 22px 12px 22px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 150px;
+}
+
+.if-step:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.if-step:first-child {
+  padding-left: 0;
+}
+
+.if-n {
+  display: block;
+  margin-bottom: 10px;
+  font: 700 11px var(--font-display);
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+}
+
+.if-step h3 {
+  margin: 0 0 8px;
+  font: 800 16px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.if-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  max-width: 24ch;
+}
+
+.if-mel {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.if-esg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+
+.if-mel-item,
+.if-esg-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 12px 20px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 100px;
+}
+
+.if-mel-item:last-child,
+.if-esg-item:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.if-mel-item:first-child,
+.if-esg-item:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.if-mel-item strong,
+.if-esg-item strong {
+  font: 800 15px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.if-mel-item span,
+.if-esg-item span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.if-kpis {
+  margin-bottom: 8px;
+}
+
+.if-kpi-pills span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  font: 700 12px var(--font-display);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: rgba(11, 110, 79, 0.08);
+}
+
+.if-note {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.if-note strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+@media (max-width: 1000px) {
+  .if-chain,
+  .if-mel {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .if-step:last-child,
+  .if-mel-item:last-child {
+    border-right: 1px solid var(--line);
+    padding-right: 12px;
+  }
+
+  .if-step:nth-child(3n),
+  .if-mel-item:nth-child(3n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .if-chain,
+  .if-mel,
+  .if-esg {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .if-step:nth-child(3n),
+  .if-mel-item:nth-child(3n),
+  .if-esg-item:nth-child(3n) {
+    border-right: 1px solid var(--line);
+    padding-right: 12px;
+  }
+
+  .if-step:nth-child(2n),
+  .if-mel-item:nth-child(2n),
+  .if-esg-item:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .if-chain,
+  .if-mel,
+  .if-esg {
+    grid-template-columns: 1fr;
+  }
+
+  .if-step,
+  .if-step:nth-child(n),
+  .if-mel-item,
+  .if-mel-item:nth-child(n),
+  .if-esg-item,
+  .if-esg-item:nth-child(n) {
+    border-right: 0;
+    padding: 18px 0;
+    min-height: 0;
+  }
+}

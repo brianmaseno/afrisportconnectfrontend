@@ -1,0 +1,133 @@
+.capabilities {
+  background:
+    radial-gradient(1000px 580px at 10% -8%, rgba(11, 110, 79, 0.3), transparent 60%),
+    radial-gradient(880px 540px at 94% 10%, rgba(0, 184, 217, 0.14), transparent 58%),
+    linear-gradient(175deg, #0b1f3a 0%, #0b1b32 58%, #081527 100%);
+  color: white;
+}
+
+.capabilities .eyebrow {
+  color: var(--gold-soft);
+}
+
+.capabilities .section-head p {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.cap-item {
+  padding: 28px 22px 28px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  min-height: 168px;
+}
+
+.cap-item:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.cap-item:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.cap-n {
+  display: block;
+  margin-bottom: 14px;
+  font: 700 12px var(--font-display);
+  letter-spacing: 0.16em;
+  color: var(--green);
+}
+
+.cap-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.cap-title-row h3 {
+  margin: 0;
+}
+
+.cap-status {
+  font: 700 10px var(--font-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cap-status.is-live {
+  color: var(--green);
+  border-color: rgba(126, 217, 164, 0.45);
+}
+
+.cap-status.is-partial {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cap-item h3 {
+  margin: 0 0 10px;
+  font: 800 18px var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cap-item p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 34ch;
+}
+
+.cap-note {
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+@media (max-width: 900px) {
+  .cap-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cap-item:nth-child(3n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    padding-right: 22px;
+  }
+
+  .cap-item:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .cap-item:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .cap-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cap-item,
+  .cap-item:nth-child(n) {
+    border-right: 0;
+    padding: 22px 0;
+    min-height: 0;
+  }
+}

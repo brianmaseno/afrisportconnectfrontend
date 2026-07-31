@@ -1,0 +1,215 @@
+.commerce {
+  background:
+    radial-gradient(1000px 580px at 10% -8%, rgba(11, 110, 79, 0.3), transparent 60%),
+    radial-gradient(880px 540px at 94% 10%, rgba(0, 184, 217, 0.14), transparent 58%),
+    linear-gradient(175deg, #0b1f3a 0%, #0b1b32 58%, #081527 100%);
+  color: white;
+}
+
+.commerce .eyebrow {
+  color: var(--gold-soft);
+}
+
+.commerce .section-head p {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.cm-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.cm-principles {
+  margin-bottom: 40px;
+}
+
+.cm-pills,
+.cm-rev-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cm-pills span {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--gold);
+  font: 700 13px var(--font-display);
+  letter-spacing: -0.01em;
+  color: white;
+  background: rgba(212, 175, 55, 0.14);
+}
+
+.cm-layers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  margin-bottom: 56px;
+}
+
+.cm-layer {
+  padding: 26px 20px 26px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  min-height: 148px;
+}
+
+.cm-layer:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.cm-layer:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.cm-n {
+  display: block;
+  margin-bottom: 12px;
+  font: 700 11px var(--font-display);
+  letter-spacing: 0.14em;
+  color: var(--green);
+}
+
+.cm-layer h3 {
+  margin: 0 0 8px;
+  font: 800 17px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.cm-layer p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13.5px;
+  line-height: 1.45;
+  max-width: 32ch;
+}
+
+.cm-cat-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 22px;
+}
+
+.cm-cat-copy {
+  margin: 0;
+  max-width: 36ch;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.cm-categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  margin-bottom: 48px;
+}
+
+.cm-cat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 18px 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  min-height: 100px;
+}
+
+.cm-cat:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.cm-cat:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.cm-cat strong {
+  font: 800 15px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.cm-cat span {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cm-revenue {
+  margin-bottom: 8px;
+}
+
+.cm-rev-pills span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font: 700 12px var(--font-display);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(11, 110, 79, 0.22);
+}
+
+.cm-note {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.cm-note strong {
+  color: white;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .cm-layers,
+  .cm-categories {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cm-layer:nth-child(3n),
+  .cm-cat:nth-child(3n) {
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    padding-right: 18px;
+  }
+
+  .cm-layer:nth-child(2n),
+  .cm-cat:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .cm-layer:nth-child(2n + 1),
+  .cm-cat:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .cm-layers,
+  .cm-categories {
+    grid-template-columns: 1fr;
+  }
+
+  .cm-layer,
+  .cm-layer:nth-child(n),
+  .cm-cat,
+  .cm-cat:nth-child(n) {
+    border-right: 0;
+    padding: 18px 0;
+    min-height: 0;
+  }
+}

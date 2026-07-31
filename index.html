@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0B1F3A" />
+
+    <title>Afrisport Connect — Africa's football super app</title>
+    <meta
+      name="description"
+      content="Afrisport Connect is Africa's football-powered digital ecosystem — connecting fans, clubs, communities, sponsors and institutions through one trusted platform."
+    />
+
+    <link rel="icon" type="image/png" href="/brand/favicon.png" />
+    <link rel="apple-touch-icon" href="/brand/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Afrisport Connect — Africa's football super app" />
+    <meta
+      property="og:description"
+      content="One trusted digital ecosystem for the match, the movement and everyone behind it."
+    />
+    <meta property="og:image" content="/images/hero-stadium.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts are self-hosted (public/fonts, wired up in src/styles/fonts.css)
+         so the site renders correctly with no network access. -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/manrope-v20-xn7gYHE41ni1AdIRggexSg.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/dmsans-v17-rP2Hp2ywxg089UriCZOIHQ.woff2"
+      crossorigin
+    />
+    <link rel="preload" as="image" href="/images/hero-stadium.jpg" />
+    <link rel="preload" as="image" href="/brand/logo-lockup-gold.png" />
+
+    <style>
+      /* Painted before React mounts so there is never a white flash. */
+      html,
+      body {
+        margin: 0;
+        background: #0b1f3a;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(900px 600px at 50% 40%, #12304f 0%, #0b1f3a 55%, #071223 100%);
+        transition:
+          opacity 0.5s ease,
+          visibility 0.5s ease;
+      }
+      #boot.done {
+        opacity: 0;
+        visibility: hidden;
+      }
+      #boot img {
+        width: 132px;
+        opacity: 0.96;
+        animation: bootPulse 2.2s ease-in-out infinite;
+      }
+      @keyframes bootPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.85;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 1;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot img {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="boot"><img src="/brand/logo-lockup-gold.png" alt="Afrisport Connect" /></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

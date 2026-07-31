@@ -1,0 +1,24 @@
+.page {
+  min-height: 60vh;
+}
+
+.page-enter {
+  animation: pageEnter 0.55s var(--ease) both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+}

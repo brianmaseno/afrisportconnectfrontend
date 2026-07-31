@@ -1,0 +1,238 @@
+.governance {
+  background:
+    linear-gradient(180deg, rgba(15, 36, 56, 0.05), transparent 42%),
+    var(--paper);
+}
+
+.gv-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.gv-principles {
+  margin-bottom: 40px;
+}
+
+.gv-pills,
+.gv-committee-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gv-pills span {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--navy, #0f2438);
+  font: 700 13px var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: rgba(15, 36, 56, 0.06);
+}
+
+.gv-layers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 56px;
+}
+
+.gv-layer {
+  padding: 26px 20px 26px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 140px;
+}
+
+.gv-layer:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.gv-layer:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.gv-n {
+  display: block;
+  margin-bottom: 12px;
+  font: 700 11px var(--font-display);
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+}
+
+.gv-layer h3 {
+  margin: 0 0 8px;
+  font: 800 17px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.gv-layer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.45;
+  max-width: 32ch;
+}
+
+.gv-seg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 22px;
+}
+
+.gv-seg-copy {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.gv-domains {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.gv-domain {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 14px 20px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 110px;
+}
+
+.gv-domain:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.gv-domain:first-child {
+  padding-left: 0;
+}
+
+.gv-domain strong {
+  font: 800 15px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.gv-domain span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.gv-pmo {
+  margin-bottom: 40px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 58ch;
+}
+
+.gv-pmo h3 {
+  margin: 0 0 10px;
+  font: 800 22px var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.gv-pmo p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.gv-committees {
+  margin-bottom: 8px;
+}
+
+.gv-committee-pills span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  font: 700 12px var(--font-display);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: rgba(11, 110, 79, 0.08);
+}
+
+.gv-note {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.gv-note strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+@media (max-width: 1000px) {
+  .gv-domains {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gv-domain:last-child {
+    border-right: 1px solid var(--line);
+    padding-right: 14px;
+  }
+
+  .gv-domain:nth-child(3n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .gv-layers {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gv-layer:nth-child(3n) {
+    border-right: 1px solid var(--line);
+    padding-right: 18px;
+  }
+
+  .gv-layer:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .gv-layer:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .gv-layers,
+  .gv-domains {
+    grid-template-columns: 1fr;
+  }
+
+  .gv-layer,
+  .gv-layer:nth-child(n),
+  .gv-domain,
+  .gv-domain:nth-child(n) {
+    border-right: 0;
+    padding: 18px 0;
+    min-height: 0;
+  }
+}

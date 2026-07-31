@@ -1,0 +1,226 @@
+.legal {
+  background:
+    linear-gradient(180deg, rgba(15, 36, 56, 0.06), transparent 40%),
+    var(--paper);
+}
+
+.lg-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.lg-principles {
+  margin-bottom: 40px;
+}
+
+.lg-pills,
+.lg-standard-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lg-pills span {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--navy, #0f2438);
+  font: 700 13px var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: rgba(15, 36, 56, 0.06);
+}
+
+.lg-domains {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 56px;
+}
+
+.lg-domain {
+  padding: 26px 20px 26px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 140px;
+}
+
+.lg-domain:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.lg-domain:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.lg-n {
+  display: block;
+  margin-bottom: 12px;
+  font: 700 11px var(--font-display);
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+}
+
+.lg-domain h3 {
+  margin: 0 0 8px;
+  font: 800 17px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.lg-domain p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.45;
+  max-width: 30ch;
+}
+
+.lg-seg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 22px;
+}
+
+.lg-seg-copy {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.lg-focus {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.lg-focus-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 18px 20px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 100px;
+}
+
+.lg-focus-item:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.lg-focus-item:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.lg-focus-item strong {
+  font: 800 15px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.lg-focus-item span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.lg-ip {
+  margin-bottom: 40px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 58ch;
+}
+
+.lg-ip h3 {
+  margin: 0 0 10px;
+  font: 800 22px var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.lg-ip p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.lg-standards {
+  margin-bottom: 8px;
+}
+
+.lg-standard-pills span {
+  display: inline-flex;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  font: 700 12px var(--font-display);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.lg-note {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.lg-note strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .lg-domains,
+  .lg-focus {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lg-domain:nth-child(3n),
+  .lg-focus-item:nth-child(3n) {
+    border-right: 1px solid var(--line);
+    padding-right: 18px;
+  }
+
+  .lg-domain:nth-child(2n),
+  .lg-focus-item:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .lg-domain:nth-child(2n + 1),
+  .lg-focus-item:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .lg-domains,
+  .lg-focus {
+    grid-template-columns: 1fr;
+  }
+
+  .lg-domain,
+  .lg-domain:nth-child(n),
+  .lg-focus-item,
+  .lg-focus-item:nth-child(n) {
+    border-right: 0;
+    padding: 18px 0;
+    min-height: 0;
+  }
+}

@@ -1,0 +1,157 @@
+.experience {
+  background:
+    radial-gradient(1000px 580px at 10% -8%, rgba(11, 110, 79, 0.3), transparent 60%),
+    radial-gradient(880px 540px at 94% 10%, rgba(0, 184, 217, 0.14), transparent 58%),
+    linear-gradient(175deg, #0b1f3a 0%, #0b1b32 58%, #081527 100%);
+  color: white;
+}
+
+.experience .section-head p {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.experience .eyebrow-green {
+  color: var(--green-glow);
+}
+
+.phones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: end;
+}
+
+.phone {
+  border-radius: 36px;
+  padding: 12px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.phone-lift {
+  transform: translateY(-28px);
+}
+
+.phone-screen {
+  background: #0b1a16;
+  border-radius: 28px;
+  padding: 18px 16px 22px;
+  min-height: 520px;
+}
+
+.phone-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 18px;
+}
+
+.phone-screen h3 {
+  margin: 0 0 18px;
+  font: 800 22px var(--font-display);
+}
+
+.app-panel {
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.app-panel.green {
+  background: linear-gradient(145deg, rgba(15, 201, 128, 0.28), rgba(15, 201, 128, 0.08));
+}
+
+.app-panel.blue {
+  background: linear-gradient(145deg, rgba(38, 155, 227, 0.35), rgba(38, 155, 227, 0.1));
+}
+
+.app-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.score {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font: 800 22px var(--font-display);
+}
+
+.app-big {
+  margin-top: 10px;
+  font: 800 28px var(--font-display);
+}
+
+.app-meta {
+  font-size: 11px;
+  margin-top: 15px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.passport {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.passport-id {
+  margin-top: auto;
+  margin-bottom: 30px;
+}
+
+.passport-foot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.avatar-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  display: block;
+}
+
+.avatar:nth-child(2) {
+  opacity: 0.85;
+}
+.avatar:nth-child(3) {
+  opacity: 0.7;
+}
+.avatar:nth-child(4) {
+  opacity: 0.55;
+}
+
+.event-title {
+  font: 800 20px var(--font-display);
+  margin-top: 10px;
+}
+
+.challenge {
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .phones {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .phone-lift {
+    transform: none;
+  }
+}

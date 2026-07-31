@@ -1,0 +1,116 @@
+.impact-section {
+  background:
+    radial-gradient(800px 520px at 0% 100%, rgba(212, 175, 55, 0.08), transparent 58%),
+    var(--paper);
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+}
+
+.impact-item {
+  grid-column: span 6;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 34px 30px 46px;
+  min-height: 236px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform 0.55s var(--ease),
+    box-shadow 0.55s var(--ease),
+    border-color 0.55s var(--ease);
+}
+
+/* Uneven spans keep the grid from reading as a template */
+.impact-item:nth-child(1),
+.impact-item:nth-child(4) {
+  grid-column: span 7;
+}
+
+.impact-item:nth-child(2),
+.impact-item:nth-child(3) {
+  grid-column: span 5;
+}
+
+.impact-item::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green-bright), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.65s var(--ease);
+}
+
+.impact-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold-line);
+}
+
+.impact-item:hover::before {
+  transform: scaleX(1);
+}
+
+.impact-item h3 {
+  margin: 0;
+  font-size: clamp(21px, 2.2vw, 27px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  max-width: 18ch;
+}
+
+.impact-item p {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.impact-number {
+  position: absolute;
+  right: 26px;
+  bottom: 18px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 5vw, 64px);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(11, 110, 79, 0.26);
+  transition: -webkit-text-stroke-color 0.55s var(--ease);
+  pointer-events: none;
+}
+
+.impact-item:hover .impact-number {
+  -webkit-text-stroke-color: rgba(212, 175, 55, 0.6);
+}
+
+@media (max-width: 900px) {
+  .impact-item,
+  .impact-item:nth-child(n) {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 600px) {
+  .impact-item {
+    padding: 28px 24px 44px;
+    min-height: 0;
+  }
+}
+
+.impact-cta {
+  margin-top: 34px;
+}

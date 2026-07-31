@@ -1,0 +1,254 @@
+.resilience {
+  background:
+    linear-gradient(180deg, rgba(11, 110, 79, 0.06), transparent 38%),
+    var(--paper);
+}
+
+.rs-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.rs-principles {
+  margin-bottom: 40px;
+}
+
+.rs-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rs-pills span {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--green);
+  font: 700 13px var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: rgba(11, 110, 79, 0.06);
+}
+
+.rs-lifecycle {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 56px;
+}
+
+.rs-step {
+  padding: 26px 20px 26px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 140px;
+}
+
+.rs-step:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.rs-step:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.rs-n {
+  display: block;
+  margin-bottom: 12px;
+  font: 700 11px var(--font-display);
+  letter-spacing: 0.14em;
+  color: var(--green-deep);
+}
+
+.rs-step h3 {
+  margin: 0 0 8px;
+  font: 800 17px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.rs-step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.45;
+  max-width: 30ch;
+}
+
+.rs-seg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 22px;
+}
+
+.rs-seg-copy {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.rs-categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.rs-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+
+.rs-cat,
+.rs-pillar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 16px 20px 0;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  min-height: 100px;
+}
+
+.rs-cat:nth-child(3n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.rs-cat:nth-child(3n + 1) {
+  padding-left: 0;
+}
+
+.rs-pillar:nth-child(4n) {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.rs-pillar:nth-child(4n + 1) {
+  padding-left: 0;
+}
+
+.rs-cat strong,
+.rs-pillar strong {
+  font: 800 15px var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.rs-cat span,
+.rs-pillar span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.rs-prep {
+  margin-bottom: 8px;
+  padding: 28px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 58ch;
+}
+
+.rs-prep h3 {
+  margin: 0 0 10px;
+  font: 800 22px var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.rs-prep p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.rs-note {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.rs-note strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+@media (max-width: 1000px) {
+  .rs-pillars {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rs-pillar:nth-child(4n) {
+    border-right: 1px solid var(--line);
+    padding-right: 16px;
+  }
+
+  .rs-pillar:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .rs-pillar:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .rs-lifecycle,
+  .rs-categories {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rs-step:nth-child(3n),
+  .rs-cat:nth-child(3n) {
+    border-right: 1px solid var(--line);
+    padding-right: 18px;
+  }
+
+  .rs-step:nth-child(2n),
+  .rs-cat:nth-child(2n) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .rs-step:nth-child(2n + 1),
+  .rs-cat:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .rs-lifecycle,
+  .rs-categories,
+  .rs-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .rs-step,
+  .rs-step:nth-child(n),
+  .rs-cat,
+  .rs-cat:nth-child(n),
+  .rs-pillar,
+  .rs-pillar:nth-child(n) {
+    border-right: 0;
+    padding: 18px 0;
+    min-height: 0;
+  }
+}

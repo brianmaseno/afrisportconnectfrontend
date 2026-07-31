@@ -1,0 +1,280 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  color: #fff;
+  overflow: hidden;
+  background: #071223;
+  isolation: isolate;
+}
+
+/* Parallax photographic layer */
+.hero-bg {
+  position: absolute;
+  inset: -12% 0 -12%;
+  z-index: -3;
+  transform: translate3d(0, var(--parallax, 0px), 0);
+  will-change: transform;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  animation: heroIn 1.8s var(--ease) both;
+}
+
+@keyframes heroIn {
+  from {
+    transform: scale(1.1);
+    filter: blur(10px) brightness(0.7);
+  }
+  to {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Gradient veil keeps the type legible over any part of the photo */
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(180deg, rgba(7, 18, 35, 0.72) 0%, rgba(7, 18, 35, 0.28) 30%, rgba(8, 21, 39, 0.86) 74%, #081527 100%),
+    linear-gradient(90deg, rgba(7, 18, 35, 0.78) 0%, transparent 62%);
+}
+
+/* Emerald / teal bloom in the upper right */
+.hero-glow {
+  position: absolute;
+  top: -14%;
+  right: -8%;
+  width: 60vw;
+  height: 60vw;
+  max-width: 900px;
+  max-height: 900px;
+  z-index: -1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 40% 40%, rgba(20, 160, 110, 0.3), transparent 58%),
+    radial-gradient(circle at 62% 58%, rgba(0, 184, 217, 0.2), transparent 60%);
+  filter: blur(14px);
+  animation: drift 16s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: calc(var(--nav-h) + 90px) 0 84px;
+}
+
+/* Badge ------------------------------------------------------------------ */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px 18px 8px 10px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  background: rgba(10, 26, 48, 0.5);
+  backdrop-filter: blur(14px);
+  margin-bottom: 26px;
+}
+
+.hero-badge img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.hero-badge span {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+/* Title ------------------------------------------------------------------ */
+.hero-title {
+  margin: 0;
+  font-size: clamp(58px, 11.5vw, 148px);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+  text-shadow: 0 22px 60px rgba(4, 12, 24, 0.5);
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-title em {
+  font-style: normal;
+}
+
+/* Bottom row ------------------------------------------------------------- */
+.hero-bottom {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 44px;
+}
+
+.hero-copy {
+  margin: 0 0 28px;
+  max-width: 52ch;
+  font-size: clamp(16px, 1.4vw, 18.5px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+/* Stat strip ------------------------------------------------------------- */
+.hero-stats {
+  display: flex;
+  gap: 34px;
+  padding: 22px 28px;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(9, 24, 45, 0.4);
+  backdrop-filter: blur(18px) saturate(150%);
+}
+
+.hero-stat {
+  min-width: 96px;
+}
+
+.hero-stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, #fff 20%, var(--gold-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-stat span {
+  display: block;
+  margin-top: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.52);
+  max-width: 15ch;
+}
+
+/* Scroll cue ------------------------------------------------------------- */
+.hero-scroll {
+  position: absolute;
+  right: max(var(--gutter), calc((100% - var(--shell)) / 2));
+  bottom: 34px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  writing-mode: vertical-rl;
+  transition: color 0.35s var(--ease);
+}
+
+.hero-scroll:hover {
+  color: var(--gold-soft);
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(180deg, transparent, var(--gold));
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-scroll-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gold-soft);
+  animation: scrollCue 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes scrollCue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+/* Responsive ------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .hero-bottom {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-stats {
+    justify-content: space-between;
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero-content {
+    padding: calc(var(--nav-h) + 64px) 0 56px;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 15vw, 82px);
+  }
+
+  .hero-stats {
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .hero-stat {
+    min-width: 0;
+  }
+
+  .hero-stat-value {
+    font-size: 27px;
+  }
+
+  .hero-stat span {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg {
+    transform: none;
+  }
+
+  .hero-bg img,
+  .hero-glow,
+  .hero-scroll-line::after {
+    animation: none;
+  }
+}

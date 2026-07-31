@@ -1,0 +1,164 @@
+.home-destinations {
+  background:
+    radial-gradient(900px 520px at 100% 0%, rgba(20, 160, 110, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+}
+
+.home-dest-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.home-dest {
+  grid-column: span 2;
+}
+
+/* Two hero tiles break the rhythm so the grid never reads as a template */
+.home-dest-feature {
+  grid-column: span 3;
+}
+
+.home-dest-link {
+  position: relative;
+  display: block;
+  height: 100%;
+  min-height: 290px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  color: #fff;
+  background: var(--ink);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.6s var(--ease),
+    box-shadow 0.6s var(--ease);
+}
+
+.home-dest-link img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 1.05s var(--ease),
+    filter 0.6s var(--ease);
+}
+
+.home-dest-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 31, 58, 0.06) 18%, rgba(8, 21, 39, 0.92) 100%);
+  transition: opacity 0.5s var(--ease);
+}
+
+/* Gold hairline frame appears on hover */
+.home-dest-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  transition: border-color 0.5s var(--ease);
+  pointer-events: none;
+}
+
+.home-dest-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 9px;
+  height: 100%;
+  min-height: 290px;
+  padding: 26px;
+}
+
+.home-dest-copy strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(21px, 2.1vw, 27px);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.home-dest-copy span {
+  max-width: 36ch;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.home-dest-copy em {
+  font-style: normal;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease);
+}
+
+.home-dest-link:hover,
+.home-dest-link:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.home-dest-link:hover img,
+.home-dest-link:focus-visible img {
+  transform: scale(1.07);
+}
+
+.home-dest-link:hover::before,
+.home-dest-link:focus-visible::before {
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+.home-dest-link:hover em,
+.home-dest-link:focus-visible em {
+  opacity: 1;
+  transform: none;
+}
+
+/* Responsive ------------------------------------------------------------- */
+@media (max-width: 1000px) {
+  .home-dest-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .home-dest,
+  .home-dest-feature {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 680px) {
+  .home-dest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-dest,
+  .home-dest-feature {
+    grid-column: span 1;
+  }
+
+  .home-dest-link,
+  .home-dest-copy {
+    min-height: 250px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-dest-link,
+  .home-dest-link img {
+    transition: none;
+  }
+}
