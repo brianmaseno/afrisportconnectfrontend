@@ -46,18 +46,14 @@ export function Loader() {
     };
   }, []);
 
+  // The static #boot splash is retired by <App>; this loader just covers the
+  // marketing site while its hero imagery and fonts settle.
   useEffect(() => {
     document.body.style.overflow = hidden ? '' : 'hidden';
-    if (hidden) document.getElementById('boot')?.remove();
     return () => {
       document.body.style.overflow = '';
     };
   }, [hidden]);
-
-  // Remove the static splash as soon as React takes over rendering the loader.
-  useEffect(() => {
-    document.getElementById('boot')?.classList.add('done');
-  }, []);
 
   return (
     <div className={`loader${hidden ? ' loader-hidden' : ''}`} role="status" aria-live="polite">

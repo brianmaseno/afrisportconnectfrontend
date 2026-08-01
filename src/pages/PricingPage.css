@@ -1,0 +1,355 @@
+/* ==========================================================================
+   Pricing / membership
+   ========================================================================== */
+
+.pricing {
+  background:
+    radial-gradient(900px 520px at 100% 0%, rgba(20, 160, 110, 0.07), transparent 60%),
+    linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+}
+
+.pricing-grid {
+  display: grid;
+  gap: 18px;
+  align-items: stretch;
+  /* Five tiers across on desktop — auto-fit left the last card orphaned on a
+     row of its own because the minimum column width did not quite fit five. */
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1240px) {
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Card ---------------------------------------------------------------- */
+.price-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 26px 26px;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.5s var(--ease),
+    box-shadow 0.5s var(--ease),
+    border-color 0.5s var(--ease);
+}
+
+.price-card::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  background: linear-gradient(90deg, var(--green-bright), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease);
+}
+
+.price-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold-line);
+}
+
+.price-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* The recommended tier carries the dark plate so the eye lands on it */
+.price-card-featured {
+  color: #fff;
+  border-color: rgba(212, 175, 55, 0.34);
+  background:
+    radial-gradient(600px 320px at 0% 0%, rgba(11, 110, 79, 0.5), transparent 62%),
+    linear-gradient(160deg, #0b1f3a 0%, #081527 100%);
+  box-shadow: 0 28px 66px rgba(11, 31, 58, 0.28);
+}
+
+.price-card-featured::before {
+  transform: scaleX(1);
+}
+
+.price-flag {
+  position: absolute;
+  top: -11px;
+  left: 26px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.price-card h3 {
+  margin: 0 0 8px;
+  font-size: 21px;
+  letter-spacing: -0.035em;
+}
+
+.price-tagline {
+  margin: 0 0 20px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  min-height: 3.2em;
+}
+
+.price-card-featured .price-tagline {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin: 0 0 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.price-card-featured .price-amount {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.price-amount strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 3vw, 36px);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.price-card-featured .price-amount strong {
+  color: var(--gold-soft);
+}
+
+.price-amount span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted-2);
+}
+
+/* --- Benefits ------------------------------------------------------------ */
+.price-benefits {
+  flex: 1;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.price-benefits li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.price-benefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-weight: 800;
+  color: var(--green-bright);
+}
+
+.price-card-featured .price-benefits li {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.price-card-featured .price-benefits li::before {
+  color: var(--gold-soft);
+}
+
+.price-cta {
+  width: 100%;
+}
+
+.pricing-note {
+  margin-top: 26px;
+  text-align: center;
+}
+
+.pricing-note p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--muted-2);
+}
+
+/* ==========================================================================
+   Comparison table
+   ========================================================================== */
+
+.compare-scroll {
+  overflow-x: auto;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 15px 18px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.compare-table thead th {
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-transform: none;
+  border-bottom-color: rgba(212, 175, 55, 0.28);
+}
+
+.compare-table thead th span {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.compare-table tbody th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.compare-table tbody tr:last-child th,
+.compare-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.compare-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Highlight the recommended column end to end */
+.compare-table .is-featured {
+  background: rgba(212, 175, 55, 0.07);
+}
+
+.compare-table .tick {
+  color: var(--green-glow);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.compare-table .dash {
+  color: rgba(255, 255, 255, 0.26);
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+
+.pricing-faq {
+  background: var(--paper);
+}
+
+.faq-list {
+  display: grid;
+  gap: 10px;
+  max-width: 820px;
+}
+
+.faq-item {
+  border-radius: var(--r-md);
+  border: 1px solid var(--line-soft);
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.35s var(--ease);
+}
+
+.faq-item.open {
+  border-color: var(--gold-line);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 22px;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.faq-item button span {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--green-deep);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 22px 20px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 68ch;
+  animation: fade-up 0.35s var(--ease) both;
+}
+
+@media (max-width: 600px) {
+  .price-tagline {
+    min-height: 0;
+  }
+}

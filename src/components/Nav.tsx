@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Brand } from './Brand';
 import { navGroups } from '../lib/navigation';
+import { useAuth } from '../lib/auth';
+import { APP_ENABLED } from '../lib/api';
 import './Nav.css';
 
 export function Nav() {
@@ -10,6 +12,7 @@ export function Nav() {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const closeTimer = useRef<number | undefined>(undefined);
   const { pathname } = useLocation();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -98,9 +101,27 @@ export function Nav() {
         </nav>
 
         <div className="nav-actions">
-          <Link className="button button-green button-sm nav-cta" to="/download">
-            Get the app <span aria-hidden="true">↗</span>
-          </Link>
+          {APP_ENABLED &&
+            (isAuthenticated ? (
+              <Link className="button button-green button-sm nav-cta" to="/app">
+                My account <span aria-hidden="true">→</span>
+              </Link>
+            ) : (
+              <>
+                <Link className="nav-signin" to="/login">
+                  Sign in
+                </Link>
+                <Link className="button button-green button-sm nav-cta" to="/signup">
+                  Join free <span aria-hidden="true">→</span>
+                </Link>
+              </>
+            ))}
+
+          {!APP_ENABLED && (
+            <Link className="button button-green button-sm nav-cta" to="/download">
+              Get the app <span aria-hidden="true">↗</span>
+            </Link>
+          )}
 
           <button
             className="menu-button"
@@ -139,9 +160,26 @@ export function Nav() {
           ))}
 
           <div className="drawer-footer">
-            <Link className="button button-green" to="/download">
-              Get the app <span aria-hidden="true">↗</span>
-            </Link>
+            {APP_ENABLED ? (
+              isAuthenticated ? (
+                <Link className="button button-green" to="/app">
+                  My account <span aria-hidden="true">→</span>
+                </Link>
+              ) : (
+                <div className="drawer-auth">
+                  <Link className="button button-green" to="/signup">
+                    Join free <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link className="button button-ghost" to="/login">
+                    Sign in
+                  </Link>
+                </div>
+              )
+            ) : (
+              <Link className="button button-green" to="/download">
+                Get the app <span aria-hidden="true">↗</span>
+              </Link>
+            )}
             <div className="drawer-meta">
               <Link to="/privacy">Privacy</Link>
               <Link to="/terms">Terms</Link>

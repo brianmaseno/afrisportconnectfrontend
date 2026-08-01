@@ -21,6 +21,7 @@ export const navGroups: NavGroup[] = [
     to: '/platform',
     items: [
       { to: '/platform', label: 'Platform', blurb: 'Matches, clubs, learning and journeys in one app.' },
+      { to: '/pricing', label: 'Pricing', blurb: 'Membership tiers, what each unlocks and what it costs.' },
       { to: '/commerce', label: 'Commerce', blurb: 'Tickets, merchandise, memberships and marketplace.' },
       { to: '/technology', label: 'Technology', blurb: 'Architecture, AI and the engineering behind it.' },
       { to: '/design', label: 'Design system', blurb: 'One visual language across mobile and web.' },

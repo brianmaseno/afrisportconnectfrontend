@@ -1,0 +1,576 @@
+/* ==========================================================================
+   Sign in / Join
+   ========================================================================== */
+
+.auth {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  min-height: 100svh;
+  background: var(--paper);
+}
+
+.auth-form-side {
+  display: grid;
+  place-items: center;
+  padding: 44px var(--gutter);
+  overflow-y: auto;
+}
+
+.auth-form-inner {
+  width: min(440px, 100%);
+}
+
+.auth-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 38px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.auth-brand img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.auth-head {
+  margin-bottom: 28px;
+}
+
+.auth-head h1 {
+  margin: 0 0 10px;
+  font-size: clamp(29px, 3.4vw, 38px);
+  letter-spacing: -0.045em;
+}
+
+.auth-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+/* --- Fields ------------------------------------------------------------- */
+.field {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field-input,
+.field-select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  color: var(--ink);
+  transition:
+    border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+.field-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23526073' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.field-input:focus,
+.field-select:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(11, 110, 79, 0.14);
+}
+
+.field-input::placeholder {
+  color: var(--muted-2);
+}
+
+.field-input:disabled,
+.field-select:disabled {
+  background: var(--paper-2);
+  cursor: not-allowed;
+  color: var(--muted-2);
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--error);
+}
+
+.field-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted-2);
+  line-height: 1.45;
+}
+
+.field-invalid .field-input,
+.field-invalid .field-select {
+  border-color: var(--error);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Checkbox */
+.field-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.field-check input {
+  margin: 2px 0 0;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+  flex: none;
+  cursor: pointer;
+}
+
+.field-check a {
+  color: var(--green-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* --- Segmented control (email / phone) ---------------------------------- */
+.segmented {
+  display: inline-flex;
+  padding: 4px;
+  margin-bottom: 20px;
+  border-radius: var(--r-pill);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+
+.segmented button {
+  padding: 9px 20px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    background 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+
+.segmented button[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Alerts ------------------------------------------------------------- */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px 16px;
+  margin-bottom: 18px;
+  border-radius: var(--r-md);
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid;
+}
+
+.alert-error {
+  background: rgba(217, 48, 37, 0.07);
+  border-color: rgba(217, 48, 37, 0.28);
+  color: #9c2117;
+}
+
+.alert-success {
+  background: rgba(40, 167, 69, 0.09);
+  border-color: rgba(40, 167, 69, 0.3);
+  color: #1c6b2c;
+}
+
+.alert-info {
+  background: rgba(26, 115, 232, 0.07);
+  border-color: rgba(26, 115, 232, 0.26);
+  color: #14509f;
+}
+
+/* --- Actions ------------------------------------------------------------ */
+.auth-submit {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.auth-footer {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-size: 14.5px;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-footer a {
+  color: var(--green-deep);
+  font-weight: 700;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- Stepper ------------------------------------------------------------ */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+
+.stepper-dot {
+  flex: 1;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--line);
+  transition: background 0.45s var(--ease);
+}
+
+.stepper-dot.done {
+  background: var(--green-bright);
+}
+
+.stepper-dot.active {
+  background: linear-gradient(90deg, var(--green-bright), var(--gold));
+}
+
+.step-label {
+  margin-bottom: 20px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.step-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.step-actions .button {
+  flex: 1;
+}
+
+/* --- OTP ---------------------------------------------------------------- */
+.otp-input {
+  letter-spacing: 0.5em;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  font-family: var(--font-display);
+}
+
+.otp-resend {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green-deep);
+  cursor: pointer;
+}
+
+.otp-resend:disabled {
+  color: var(--muted-2);
+  cursor: not-allowed;
+}
+
+/* --- Visual panel ------------------------------------------------------- */
+.auth-visual {
+  position: relative;
+  overflow: hidden;
+  background: #081527;
+}
+
+.auth-visual > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-visual-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(700px 520px at 30% 20%, rgba(11, 110, 79, 0.42), transparent 62%),
+    linear-gradient(180deg, rgba(7, 18, 35, 0.62) 0%, rgba(8, 21, 39, 0.92) 100%);
+}
+
+.auth-visual-copy {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 52px;
+  margin: 0;
+  color: #fff;
+}
+
+.auth-visual-copy > img {
+  margin-bottom: 26px;
+}
+
+.auth-visual-copy blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(21px, 2vw, 28px);
+  line-height: 1.18;
+  letter-spacing: -0.04em;
+  max-width: 22ch;
+}
+
+.auth-visual-copy em {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold-soft);
+}
+
+/* --- Responsive --------------------------------------------------------- */
+@media (max-width: 940px) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-visual {
+    display: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .auth-form-side {
+    padding: 30px var(--gutter) 44px;
+  }
+
+  .auth-brand {
+    margin-bottom: 28px;
+  }
+}
+
+/* --- Team picker (competition → team) ------------------------------------ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 4px;
+  margin-bottom: 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper-2);
+}
+
+.team-grid .muted {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 14px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.team-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  background: var(--surface);
+  font-family: var(--font-body);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease),
+    background 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.team-option:hover {
+  transform: translateY(-1px);
+  border-color: var(--gold-line);
+}
+
+.team-option.selected {
+  border-color: var(--green);
+  background: rgba(20, 160, 110, 0.09);
+  box-shadow: 0 0 0 2px rgba(20, 160, 110, 0.14);
+}
+
+.team-crest {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--paper-2);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  overflow: hidden;
+}
+
+.team-crest img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 3px;
+}
+
+.team-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* --- Membership tier chooser --------------------------------------------- */
+.tier-choice {
+  display: grid;
+  gap: 8px;
+}
+
+.tier-option {
+  display: block;
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-align: left;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease),
+    background 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.tier-option:hover {
+  border-color: var(--gold-line);
+}
+
+.tier-option.selected {
+  border-color: var(--green);
+  background: rgba(20, 160, 110, 0.06);
+  box-shadow: 0 0 0 2px rgba(20, 160, 110, 0.14);
+}
+
+.tier-option-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+}
+
+.tier-option-head strong {
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.tier-option-head em {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--green-deep);
+}
+
+.tier-option.selected .tier-option-head em {
+  color: var(--gold-deep);
+}
+
+.tier-option ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 3px;
+}
+
+.tier-option li {
+  position: relative;
+  padding-left: 17px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+.tier-option li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green-bright);
+  font-weight: 700;
+}
