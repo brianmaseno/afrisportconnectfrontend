@@ -907,6 +907,7 @@ export function SupportPage() {
 export function PaymentReturnPage() {
   const [status, setStatus] = useState<'checking' | 'ok' | 'failed'>('checking');
   const [message, setMessage] = useState('Confirming your payment…');
+  const [purpose, setPurpose] = useState<string | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -927,9 +928,11 @@ export function PaymentReturnPage() {
 
     payments
       .verify(reference)
-      .then(() => {
+      .then((data) => {
+        const p = (data as { purpose?: string } | null)?.purpose ?? null;
+        setPurpose(p);
         setStatus('ok');
-        setMessage('Payment confirmed. Thank you.');
+        setMessage(successMessageFor(p));
         try {
           window.sessionStorage.removeItem('afrisport.payment.reference');
         } catch {
@@ -955,8 +958,17 @@ export function PaymentReturnPage() {
           <Link className="button button-green button-sm" to="/app">
             Go to home
           </Link>
-          <Link className="button button-outline button-sm" to="/app/orders">
-            My orders
+          {purpose === 'tourism_booking' ? (
+            <Link className="button button-outline button-sm" to="/app/tourism/bookings">
+              My tourism bookings
+            </Link>
+          ) : (
+            <Link className="button button-outline button-sm" to="/app/orders">
+              My orders
+            </Link>
+          )}
+          <Link className="button button-outline button-sm" to="/app/notifications">
+            Notifications
           </Link>
           <Link className="button button-outline button-sm" to="/app/wallet">
             Wallet
@@ -965,6 +977,27 @@ export function PaymentReturnPage() {
       </Panel>
     </>
   );
+}
+
+function successMessageFor(purpose: string | null): string {
+  switch (purpose) {
+    case 'tourism_booking':
+      return 'Successfully booked! Your tour is confirmed. Check Tourism bookings or Notifications for details.';
+    case 'order':
+      return 'Order paid successfully. You can track it under My orders.';
+    case 'event_ticket':
+      return 'Ticket purchased successfully. Find it under My tickets.';
+    case 'membership':
+      return 'Membership activated successfully. Welcome aboard!';
+    case 'donation':
+      return 'Donation received — thank you for your support.';
+    case 'wallet_topup':
+      return 'Wallet topped up successfully.';
+    case 'founders':
+      return 'Founders package activated successfully.';
+    default:
+      return 'Payment confirmed successfully. Thank you.';
+  }
 }
 
 /* -------------------------------------------------------------------------- */

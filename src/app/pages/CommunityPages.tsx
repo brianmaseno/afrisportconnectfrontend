@@ -29,8 +29,29 @@ export function CommunityPage() {
     <>
       <PageHeader
         title="Community"
-        subtitle="Chapters near you, upcoming meet-ups and where you stand among supporters."
+        subtitle="Chapters near you, fan travel, upcoming meet-ups and where you stand among supporters."
       />
+
+      <div className="grid-2" style={{ marginBottom: 24 }}>
+        <Panel>
+          <strong>Tourism</strong>
+          <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14 }}>
+            Explore destinations and book fan travel experiences across Africa.
+          </p>
+          <Link className="button button-green button-sm" to="/app/tourism">
+            Browse destinations
+          </Link>
+        </Panel>
+        <Panel>
+          <strong>Chapters</strong>
+          <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14 }}>
+            Join your club chapter, chat with members and follow local elections.
+          </p>
+          <Link className="button button-outline button-sm" to="/app/chapters">
+            Find chapters
+          </Link>
+        </Panel>
+      </div>
 
       <div className="grid-2">
         <Section title="Chapters">

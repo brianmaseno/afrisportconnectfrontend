@@ -39,6 +39,7 @@ import { MatchesPage } from './app/pages/MatchesPage';
 import { DiscoverPage } from './app/pages/DiscoverPage';
 import { PassportPage } from './app/pages/PassportPage';
 import { CommunityPage, ChaptersPage, EventsPage } from './app/pages/CommunityPages';
+import { TourismPage, TourismDetailPage, TourismBookingsPage } from './app/pages/TourismPages';
 import { LearnPage, ImpactPage, HelpPage } from './app/pages/ExplorePages';
 import { ShopPage, ProductPage, OrderPage } from './app/pages/ShopPages';
 import { CoursePage } from './app/pages/CoursePage';
@@ -165,6 +166,9 @@ export default function App() {
                 <Route path="feed" element={<FeedPage />} />
                 <Route path="chapters" element={<ChaptersPage />} />
                 <Route path="chapters/:slug" element={<ChapterPage />} />
+                <Route path="tourism" element={<TourismPage />} />
+                <Route path="tourism/bookings" element={<TourismBookingsPage />} />
+                <Route path="tourism/:slug" element={<TourismDetailPage />} />
                 <Route path="events" element={<EventsPage />} />
                 <Route path="events/:slug" element={<EventPage />} />
                 <Route path="network" element={<NetworkPage />} />

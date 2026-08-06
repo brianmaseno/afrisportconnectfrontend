@@ -33,10 +33,14 @@ export type Club = {
   impact_pillar?: string | null;
 };
 
+export type MembershipCategory = 'individual' | 'corporate';
+
 export type MembershipTier = {
   id: number;
   name: string;
   slug: string;
+  /** individual = fans; corporate = organisations / brands */
+  category?: MembershipCategory | string | null;
   description?: string | null;
   price: string | number;
   currency?: string;
@@ -44,6 +48,8 @@ export type MembershipTier = {
   benefits?: string[];
   badge_color?: string | null;
   passport_theme?: PassportTheme | null;
+  /** Lower numbers appear first on signup, membership and pricing. */
+  sort_order?: number | null;
   is_active?: boolean;
   is_visible?: boolean;
 };

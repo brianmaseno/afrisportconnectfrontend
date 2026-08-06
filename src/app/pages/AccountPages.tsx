@@ -3,7 +3,7 @@ import { useAuth } from '../../lib/auth';
 import { useApi, useMutation } from '../../lib/useApi';
 import { api, extractList, mediaUrl } from '../../lib/api';
 import { goToCheckout, payments } from '../../lib/payments';
-import { formatDate, formatMoney, formatNumber, relativeTime } from '../../lib/format';
+import { formatDate, formatMembershipUsd, formatMoney, formatNumber, relativeTime } from '../../lib/format';
 import { Alert, TextField } from '../../components/Field';
 import { Badge, DataState, PageHeader, Panel, Row, Section, Stat } from '../ui';
 import type { MembershipTier, NotificationItem, RewardBalance, Ticket } from '../../lib/types';
@@ -579,13 +579,20 @@ export function WalletPage() {
 
 export function MembershipPage() {
   const { user, refresh } = useAuth();
+  const [category, setCategory] = useState<'individual' | 'corporate'>('individual');
   const current = useApi<{ tier?: MembershipTier; status?: string; ends_at?: string }>(
     '/membership/current',
   );
   const tiers = useApi<MembershipTier[]>('/membership/tiers');
   const compare = useApi<unknown>('/membership/compare');
 
-  const list = (tiers.data ?? []).filter((t) => t.is_visible !== false);
+  const list = (tiers.data ?? [])
+    .filter((t) => {
+      if (t.is_visible === false) return false;
+      const cat = t.category === 'corporate' ? 'corporate' : 'individual';
+      return cat === category;
+    })
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0) || a.id - b.id);
   const activeTierId = current.data?.tier?.id ?? user?.membership?.tier?.id;
   const comparison = extractList<Record<string, unknown>>(compare.data);
 
@@ -624,15 +631,27 @@ export function MembershipPage() {
       </Panel>
 
       <Section title="All tiers">
+        <div className="inline" style={{ gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
+          {(['individual', 'corporate'] as const).map((key) => (
+            <button
+              key={key}
+              type="button"
+              className={`button ${category === key ? 'button-green' : 'button-outline'}`}
+              onClick={() => setCategory(key)}
+            >
+              {key === 'individual' ? 'Individuals' : 'Corporates'}
+            </button>
+          ))}
+        </div>
         <DataState
           loading={tiers.loading}
           error={tiers.error}
           data={list}
           onRetry={tiers.reload}
-          empty={{ title: 'No tiers available' }}
+          empty={{ title: `No ${category} tiers available` }}
         >
           {(items) => (
-            <div className="grid-4">
+            <div className="tier-grid">
               {items.map((t) => {
                 const isCurrent = t.id === activeTierId;
                 return (
@@ -642,7 +661,9 @@ export function MembershipPage() {
                       {isCurrent && <Badge tone="green">Current</Badge>}
                     </div>
                     <span className="stat-tile-value" style={{ fontSize: 26 }}>
-                      {Number(t.price) > 0 ? formatMoney(t.price, t.currency ?? 'KES') : 'Free'}
+                      {Number(t.price) > 0
+                        ? formatMembershipUsd(t.price, t.currency ?? 'KES')
+                        : 'Free'}
                     </span>
                     <p className="muted" style={{ fontSize: 13.5, margin: '10px 0 14px' }}>
                       {t.description}

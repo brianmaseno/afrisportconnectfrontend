@@ -7,9 +7,9 @@ import { useAuth } from '../lib/auth';
 import { useApi, useMutation } from '../lib/useApi';
 import { api, extractList, mediaUrl } from '../lib/api';
 import { goToCheckout } from '../lib/payments';
-import { formatMoney } from '../lib/format';
+import { formatMembershipUsd } from '../lib/format';
 import { media } from '../lib/media';
-import type { Club, Country, MembershipTier } from '../lib/types';
+import type { Club, Country, MembershipCategory, MembershipTier } from '../lib/types';
 
 type Competition = {
   id: number;
@@ -27,7 +27,11 @@ type Team = {
   tla?: string | null;
 };
 
-const STEPS = ['Your details', 'Location', 'Your team'] as const;
+const STEPS = ['Your details', 'Location', 'Membership', 'Your team'] as const;
+
+function tierCategory(t: MembershipTier): MembershipCategory {
+  return t.category === 'corporate' ? 'corporate' : 'individual';
+}
 
 export function SignupPage() {
   const { register } = useAuth();
@@ -46,10 +50,13 @@ export function SignupPage() {
   const [regionId, setRegionId] = useState('');
   const [cityId, setCityId] = useState('');
   const [occupation, setOccupation] = useState('');
-  const [tierId, setTierId] = useState('');
   const [referral, setReferral] = useState('');
 
-  /* Step 3 — competition then team, mirroring the mobile onboarding */
+  /* Step 3 — membership category + tier from API */
+  const [membershipCategory, setMembershipCategory] = useState<MembershipCategory>('individual');
+  const [tierId, setTierId] = useState('');
+
+  /* Step 4 — competition then team, mirroring the mobile onboarding */
   const [competitionId, setCompetitionId] = useState('');
   const [teamId, setTeamId] = useState<number | null>(null);
   const [clubId, setClubId] = useState('');
@@ -69,7 +76,13 @@ export function SignupPage() {
   const clubs = useApi<unknown>('/clubs', [], { per_page: 200 });
 
   const countryList = countries.data ?? [];
-  const tierList = (tiers.data ?? []).filter((t) => t.is_visible !== false);
+  const tierList = useMemo(
+    () =>
+      (tiers.data ?? [])
+        .filter((t) => t.is_visible !== false && tierCategory(t) === membershipCategory)
+        .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0) || a.id - b.id),
+    [tiers.data, membershipCategory],
+  );
   const competitionList = useMemo(
     () => extractList<Competition>(competitions.data),
     [competitions.data],
@@ -145,7 +158,20 @@ export function SignupPage() {
       if (!countryId) return 'Please choose your country.';
       return null;
     }
+    if (current === 2) {
+      // Free / no selection is allowed for individuals; corporates must pick a plan when listed.
+      if (membershipCategory === 'corporate' && tierList.length > 0 && !tierId) {
+        return 'Please choose a corporate membership plan.';
+      }
+      return null;
+    }
     return null;
+  }
+
+  function selectCategory(next: MembershipCategory) {
+    setMembershipCategory(next);
+    setTierId('');
+    setLocalError(null);
   }
 
   function goNext(e: FormEvent) {
@@ -310,67 +336,6 @@ export function SignupPage() {
             </div>
           )}
 
-          {tierList.length > 0 && (
-            <div className="field">
-              <span className="field-label">Membership</span>
-
-              {/* A dropdown gave no idea what you were signing up for, so the
-                  tiers and their benefits are laid out to compare. */}
-              <div className="tier-choice" role="radiogroup" aria-label="Membership tier">
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={tierId === ''}
-                  className={`tier-option${tierId === '' ? ' selected' : ''}`}
-                  onClick={() => setTierId('')}
-                >
-                  <span className="tier-option-head">
-                    <strong>Free</strong>
-                    <em>No charge</em>
-                  </span>
-                  <ul>
-                    <li>Club news and match centre</li>
-                    <li>Fan Passport and community</li>
-                  </ul>
-                </button>
-
-                {tierList
-                  .filter((t) => Number(t.price) > 0)
-                  .map((t) => (
-                    <button
-                      key={t.id}
-                      type="button"
-                      role="radio"
-                      aria-checked={tierId === String(t.id)}
-                      className={`tier-option${tierId === String(t.id) ? ' selected' : ''}`}
-                      onClick={() => setTierId(String(t.id))}
-                    >
-                      <span className="tier-option-head">
-                        <strong>{t.name}</strong>
-                        <em>{formatMoney(t.price, t.currency ?? 'KES')}</em>
-                      </span>
-                      {Array.isArray(t.benefits) && t.benefits.length > 0 ? (
-                        <ul>
-                          {t.benefits.slice(0, 4).map((b) => (
-                            <li key={b}>{String(b).replace(/_/g, ' ')}</li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <ul>
-                          <li>{t.description ?? 'Full membership benefits'}</li>
-                        </ul>
-                      )}
-                    </button>
-                  ))}
-              </div>
-
-              <span className="field-hint">
-                Paid tiers are charged after your account is created. If payment does not go
-                through you stay on Free and can upgrade any time.
-              </span>
-            </div>
-          )}
-
           <TextField
             label="Occupation"
             value={occupation}
@@ -397,8 +362,131 @@ export function SignupPage() {
         </form>
       )}
 
-      {/* ---------------- Step 3 — competition then team ---------------- */}
+      {/* ---------------- Step 3 — membership (individuals / corporates) ---------------- */}
       {step === 2 && (
+        <form onSubmit={goNext} noValidate>
+          <div className="field">
+            <span className="field-label">Membership</span>
+            <p className="field-hint" style={{ marginTop: 0, marginBottom: 10 }}>
+              Choose whether you are joining as an individual fan or as a corporate / organisation.
+              Plans are loaded from Afrisport Connect.
+            </p>
+
+            <div className="tier-category" role="tablist" aria-label="Membership type">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={membershipCategory === 'individual'}
+                className={`tier-category-btn${membershipCategory === 'individual' ? ' selected' : ''}`}
+                onClick={() => selectCategory('individual')}
+              >
+                Individuals
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={membershipCategory === 'corporate'}
+                className={`tier-category-btn${membershipCategory === 'corporate' ? ' selected' : ''}`}
+                onClick={() => selectCategory('corporate')}
+              >
+                Corporates
+              </button>
+            </div>
+
+            {tiers.loading && <p className="muted">Loading membership plans…</p>}
+            {tiers.error && <Alert>{tiers.error}</Alert>}
+
+            {!tiers.loading && !tiers.error && (
+              <div
+                className="tier-choice"
+                role="radiogroup"
+                aria-label={
+                  membershipCategory === 'corporate'
+                    ? 'Corporate membership plans'
+                    : 'Individual membership plans'
+                }
+              >
+                {membershipCategory === 'individual' && (
+                  <button
+                    type="button"
+                    role="radio"
+                    aria-checked={tierId === ''}
+                    className={`tier-option${tierId === '' ? ' selected' : ''}`}
+                    onClick={() => setTierId('')}
+                  >
+                    <span className="tier-option-head">
+                      <strong>Free</strong>
+                      <em>No charge</em>
+                    </span>
+                    <ul>
+                      <li>Club news and match centre</li>
+                      <li>Fan Passport and community</li>
+                    </ul>
+                  </button>
+                )}
+
+                {tierList
+                  .filter((t) => membershipCategory === 'corporate' || Number(t.price) > 0)
+                  .map((t) => (
+                    <button
+                      key={t.id}
+                      type="button"
+                      role="radio"
+                      aria-checked={tierId === String(t.id)}
+                      className={`tier-option${tierId === String(t.id) ? ' selected' : ''}`}
+                      onClick={() => setTierId(String(t.id))}
+                    >
+                      <span className="tier-option-head">
+                        <strong>{t.name}</strong>
+                        <em>
+                          {Number(t.price) > 0
+                            ? formatMembershipUsd(t.price, t.currency ?? 'KES')
+                            : 'No charge'}
+                        </em>
+                      </span>
+                      {Array.isArray(t.benefits) && t.benefits.length > 0 ? (
+                        <ul>
+                          {t.benefits.slice(0, 4).map((b) => (
+                            <li key={b}>{String(b).replace(/_/g, ' ')}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <ul>
+                          <li>{t.description ?? 'Full membership benefits'}</li>
+                        </ul>
+                      )}
+                    </button>
+                  ))}
+
+                {!tierList.filter((t) => membershipCategory === 'corporate' || Number(t.price) > 0)
+                  .length && membershipCategory === 'corporate' && (
+                  <p className="muted">
+                    No corporate plans are published yet. Switch to Individuals, or check back
+                    shortly.
+                  </p>
+                )}
+              </div>
+            )}
+
+            <span className="field-hint">
+              Paid plans are charged after your account is created. If payment does not go through
+              you stay on Free and can upgrade any time.
+            </span>
+          </div>
+
+          <div className="step-actions">
+            <button className="button button-outline" type="button" onClick={() => setStep(1)}>
+              Back
+            </button>
+            <button className="button button-green" type="submit">
+              Continue <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </form>
+      )}
+
+      {/* ---------------- Step 4 — competition then team ---------------- */}
+      {step === 3 && (
         <form onSubmit={onSubmit} noValidate>
           <SelectField
             label="Competition"
@@ -524,7 +612,7 @@ export function SignupPage() {
             <button
               className="button button-outline"
               type="button"
-              onClick={() => setStep(1)}
+              onClick={() => setStep(2)}
               disabled={createAccount.pending}
             >
               Back

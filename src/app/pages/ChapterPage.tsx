@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useApi, useMutation } from '../../lib/useApi';
 import { api, extractList, mediaUrl } from '../../lib/api';
@@ -7,12 +7,21 @@ import { Alert } from '../../components/Field';
 import { Badge, DataState, PageHeader, Panel, Row, Stat } from '../ui';
 import type { Chapter, EventItem } from '../../lib/types';
 
-type Tab = 'about' | 'announcements' | 'events' | 'members' | 'elections';
+type Tab = 'about' | 'chat' | 'announcements' | 'events' | 'members' | 'elections';
+
+type ChapterMessage = {
+  id: number;
+  body?: string;
+  created_at?: string;
+  user?: { id?: number; name?: string; avatar?: string | null };
+};
 
 export function ChapterPage() {
   const { slug = '' } = useParams();
   const [tab, setTab] = useState<Tab>('about');
   const [notice, setNotice] = useState<string | null>(null);
+  const [chatBody, setChatBody] = useState('');
+  const [chatMessages, setChatMessages] = useState<ChapterMessage[]>([]);
 
   const chapter = useApi<Chapter>(`/chapters/${slug}`, [slug]);
   const announcements = useApi<unknown>(
@@ -25,6 +34,18 @@ export function ChapterPage() {
     tab === 'elections' ? `/chapters/${slug}/elections` : null,
     [slug, tab],
   );
+  const chat = useApi<unknown>(
+    tab === 'chat' && Boolean((chapter.data as Chapter & { is_member?: boolean })?.is_member)
+      ? `/chapters/${slug}/messages`
+      : null,
+    [slug, tab, (chapter.data as Chapter & { is_member?: boolean })?.is_member],
+  );
+
+  useEffect(() => {
+    if (chat.data) {
+      setChatMessages(extractList<ChapterMessage>(chat.data));
+    }
+  }, [chat.data]);
 
   const join = useMutation(async () => {
     await api.post(`/chapters/${slug}/join`);
@@ -44,8 +65,16 @@ export function ChapterPage() {
     elections.reload();
   });
 
-  const c = chapter.data;
-  const error = join.error ?? leave.error ?? vote.error;
+  const sendChat = useMutation(async () => {
+    const body = chatBody.trim();
+    if (!body) return;
+    const msg = await api.post<ChapterMessage>(`/chapters/${slug}/messages`, { body });
+    setChatMessages((prev) => [...prev, msg]);
+    setChatBody('');
+  });
+
+  const c = chapter.data as (Chapter & { is_member?: boolean }) | null;
+  const error = join.error ?? leave.error ?? vote.error ?? sendChat.error ?? chat.error;
 
   return (
     <>
@@ -54,22 +83,25 @@ export function ChapterPage() {
         subtitle={c?.description ?? labelOf(c?.city) ?? 'Supporter chapter'}
         actions={
           <>
-            <button
-              className="button button-green button-sm"
-              type="button"
-              disabled={join.pending}
-              onClick={() => void join.run()}
-            >
-              {join.pending ? 'Joining…' : 'Join'}
-            </button>
-            <button
-              className="button button-outline button-sm"
-              type="button"
-              disabled={leave.pending}
-              onClick={() => void leave.run()}
-            >
-              {leave.pending ? 'Leaving…' : 'Leave'}
-            </button>
+            {!c?.is_member ? (
+              <button
+                className="button button-green button-sm"
+                type="button"
+                disabled={join.pending}
+                onClick={() => void join.run()}
+              >
+                {join.pending ? 'Joining…' : 'Join'}
+              </button>
+            ) : (
+              <button
+                className="button button-outline button-sm"
+                type="button"
+                disabled={leave.pending}
+                onClick={() => void leave.run()}
+              >
+                {leave.pending ? 'Leaving…' : 'Leave'}
+              </button>
+            )}
             <Link className="button button-outline button-sm" to="/app/chapters">
               All chapters
             </Link>
@@ -83,11 +115,11 @@ export function ChapterPage() {
       <div className="grid-3" style={{ marginBottom: 24 }}>
         <Stat label="Members" value={formatNumber(c?.members_count ?? c?.member_count ?? 0)} />
         <Stat label="City" value={labelOf(c?.city) || '—'} />
-        <Stat label="Chapter" value={c?.name ?? '—'} />
+        <Stat label="Status" value={c?.is_member ? 'Member' : 'Visitor'} />
       </div>
 
       <div className="segmented" role="group" aria-label="Chapter sections">
-        {(['about', 'announcements', 'events', 'members', 'elections'] as Tab[]).map((t) => (
+        {(['about', 'chat', 'announcements', 'events', 'members', 'elections'] as Tab[]).map((t) => (
           <button key={t} type="button" aria-pressed={tab === t} onClick={() => setTab(t)}>
             {t[0].toUpperCase() + t.slice(1)}
           </button>
@@ -97,8 +129,98 @@ export function ChapterPage() {
       {tab === 'about' && (
         <Panel>
           <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6 }}>
-            {c?.description ?? 'This chapter has not added a description yet.'}
+            {c?.description ??
+              'This chapter has not added a description yet. Join to chat with fellow supporters.'}
           </p>
+        </Panel>
+      )}
+
+      {tab === 'chat' && (
+        <Panel>
+          {!c?.is_member ? (
+            <div>
+              <p style={{ marginTop: 0 }}>Chapter chat is for members only.</p>
+              <button className="button button-green button-sm" type="button" onClick={() => void join.run()}>
+                Join to chat
+              </button>
+            </div>
+          ) : (
+            <div className="stack">
+              <DataState
+                loading={chat.loading}
+                error={chat.error}
+                data={chatMessages}
+                onRetry={chat.reload}
+                empty={{ title: 'No messages yet', body: 'Say hello to your chapter.' }}
+              >
+                {(items) => (
+                  <div className="stack" style={{ maxHeight: 420, overflow: 'auto' }}>
+                    {items.map((m) => (
+                      <div key={m.id} style={{ display: 'flex', gap: 10 }}>
+                        {mediaUrl(m.user?.avatar) ? (
+                          <img
+                            src={mediaUrl(m.user?.avatar)!}
+                            alt=""
+                            width={36}
+                            height={36}
+                            style={{ borderRadius: '50%', objectFit: 'cover' }}
+                          />
+                        ) : (
+                          <div
+                            style={{
+                              width: 36,
+                              height: 36,
+                              borderRadius: '50%',
+                              background: 'var(--surface-2, #12304f)',
+                              display: 'grid',
+                              placeItems: 'center',
+                              fontWeight: 700,
+                            }}
+                          >
+                            {(m.user?.name ?? '?')[0]}
+                          </div>
+                        )}
+                        <div style={{ flex: 1 }}>
+                          <div className="inline" style={{ justifyContent: 'space-between', gap: 8 }}>
+                            <strong>{m.user?.name ?? 'Member'}</strong>
+                            <span style={{ fontSize: 12, color: 'var(--muted)' }}>
+                              {relativeTime(m.created_at)}
+                            </span>
+                          </div>
+                          <p style={{ margin: '4px 0 0', lineHeight: 1.45 }}>{m.body}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </DataState>
+              <form
+                className="inline"
+                style={{ gap: 8, alignItems: 'flex-end' }}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  void sendChat.run();
+                }}
+              >
+                <label style={{ flex: 1 }}>
+                  Message
+                  <input
+                    value={chatBody}
+                    onChange={(e) => setChatBody(e.target.value)}
+                    placeholder="Message the chapter…"
+                    maxLength={4000}
+                  />
+                </label>
+                <button
+                  className="button button-green"
+                  type="submit"
+                  disabled={sendChat.pending || !chatBody.trim()}
+                >
+                  {sendChat.pending ? 'Sending…' : 'Send'}
+                </button>
+              </form>
+            </div>
+          )}
         </Panel>
       )}
 

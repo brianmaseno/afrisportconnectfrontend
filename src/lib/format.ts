@@ -42,6 +42,9 @@ export function relativeTime(value?: string | null): string {
   return 'just now';
 }
 
+/** How many KES equal 1 USD for membership display conversion. */
+export const KES_PER_USD = Number(import.meta.env.VITE_KES_PER_USD || 130) || 130;
+
 export function formatMoney(
   amount?: string | number | null,
   currency = 'KES',
@@ -49,7 +52,7 @@ export function formatMoney(
   const n = typeof amount === 'string' ? parseFloat(amount) : amount;
   if (n === null || n === undefined || Number.isNaN(n)) return '—';
   try {
-    return new Intl.NumberFormat('en-KE', {
+    return new Intl.NumberFormat(currency === 'USD' ? 'en-US' : 'en-KE', {
       style: 'currency',
       currency,
       maximumFractionDigits: n % 1 === 0 ? 0 : 2,
@@ -57,6 +60,30 @@ export function formatMoney(
   } catch {
     return `${currency} ${n.toLocaleString()}`;
   }
+}
+
+/** Convert a tier price into USD for public pricing UI. */
+export function toUsdAmount(
+  amount?: string | number | null,
+  currency = 'KES',
+): number {
+  const n = typeof amount === 'string' ? parseFloat(amount) : Number(amount ?? 0);
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  const code = (currency || 'KES').toUpperCase();
+  if (code === 'USD') return n;
+  if (code === 'KES') return n / KES_PER_USD;
+  return n;
+}
+
+/** Always show membership prices in USD (converting from KES when needed). */
+export function formatMembershipUsd(
+  amount?: string | number | null,
+  currency = 'KES',
+): string {
+  const n = typeof amount === 'string' ? parseFloat(amount) : Number(amount ?? 0);
+  if (!Number.isFinite(n)) return '—';
+  if (n <= 0) return 'Free';
+  return formatMoney(toUsdAmount(n, currency), 'USD');
 }
 
 export function formatNumber(n?: number | null): string {

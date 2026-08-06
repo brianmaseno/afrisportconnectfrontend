@@ -7,7 +7,7 @@
  * against the API origin.
  */
 
-const DEFAULT_BASE = 'https://clubconnect-plapt.ondigitalocean.app/api/v1';
+const DEFAULT_BASE = 'https://admindashboard.afrisportconnect.com/api/v1';
 
 /**
  * Either absolute ("https://host/api/v1") or relative ("/api/v1").
@@ -193,9 +193,11 @@ async function request<T = unknown>(
   const headers: Record<string, string> = {
     Accept: 'application/json',
     'X-Requested-With': 'AfrisportWeb',
-    // The Laravel host is sometimes exposed through an ngrok tunnel in dev.
-    'ngrok-skip-browser-warning': 'true',
   };
+  // Only needed when the API is reached through an ngrok tunnel in local/dev.
+  if (import.meta.env.DEV || /ngrok/i.test(API_BASE_URL)) {
+    headers['ngrok-skip-browser-warning'] = 'true';
+  }
 
   const isFormData = body instanceof FormData;
   if (body !== undefined && !isFormData) headers['Content-Type'] = 'application/json';

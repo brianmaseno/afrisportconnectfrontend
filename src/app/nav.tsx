@@ -88,6 +88,8 @@ export const appNav: { label: string; items: AppNavItem[] }[] = [
       { to: '/app/community', label: 'Community', icon: I.people },
       { to: '/app/feed', label: 'Feed', icon: I.chat },
       { to: '/app/chapters', label: 'Chapters', icon: I.pin },
+      { to: '/app/tourism', label: 'Tourism', icon: I.pin },
+      { to: '/app/tourism/bookings', label: 'Tourism bookings', icon: I.receipt },
       { to: '/app/events', label: 'Events', icon: I.calendar },
       { to: '/app/network', label: 'Network', icon: I.network },
       { to: '/app/creators', label: 'Creators', icon: I.spark },

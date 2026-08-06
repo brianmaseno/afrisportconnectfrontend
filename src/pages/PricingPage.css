@@ -10,23 +10,10 @@
 
 .pricing-grid {
   display: grid;
-  gap: 18px;
+  gap: 22px;
   align-items: stretch;
-  /* Five tiers across on desktop — auto-fit left the last card orphaned on a
-     row of its own because the minimum column width did not quite fit five. */
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-@media (max-width: 1240px) {
-  .pricing-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 860px) {
-  .pricing-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  /* Flexible columns so any number of tiers never overlaps or stacks. */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 @media (max-width: 560px) {
@@ -38,8 +25,12 @@
 /* --- Card ---------------------------------------------------------------- */
 .price-card {
   position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: visible;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   padding: 28px 26px 26px;
   border-radius: var(--r-lg);
   background: var(--surface);
@@ -65,7 +56,8 @@
 }
 
 .price-card:hover {
-  transform: translateY(-6px);
+  z-index: 2;
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--gold-line);
 }
