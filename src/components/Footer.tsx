@@ -73,7 +73,7 @@ export function Footer() {
 
           <nav className="footer-col" aria-label="Company">
             <h3>Company</h3>
-            <Link to="/about">About &amp; founder</Link>
+            <Link to="/about">About</Link>
             <Link to="/impact">Impact &amp; ESG</Link>
             <a href="mailto:support@clubconnect.africa">Help centre</a>
             <a href="mailto:support@clubconnect.africa?subject=Afrisport%20Connect%20feedback">

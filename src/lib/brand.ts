@@ -17,27 +17,21 @@ export const BRAND = {
   foundingLocation: 'Nairobi, Kenya',
   email: 'support@clubconnect.africa',
   founder: {
-    name: 'Brian Maseno',
-    alternateName: 'Brian Mayoga Maseno',
-    jobTitle: 'Founder',
-    url: 'https://www.linkedin.com/in/brian-maseno-17a47a244',
-    sameAs: ['https://www.linkedin.com/in/brian-maseno-17a47a244', 'https://github.com/brianmaseno'],
-  },
-  /** Distinct from the similarly named athletics scholarship brand. */
-  notAffiliatedWith: {
-    name: 'AfriSportsConnect',
-    domain: 'afrisportsconnect.com',
-    note:
-      'Afrisport Connect (afrisportconnect.com — no “s” after sport) is a separate football digital platform and is not affiliated with AfriSportsConnect (afrisportsconnect.com).',
+    name: 'Lyndah Libese',
+    jobTitle: 'Founder & Chief Executive Officer (CEO)',
+    bio:
+      "Visionary behind AfriSport Connect, leading the development of Africa's integrated digital sports ecosystem that connects fans, athletes, clubs, businesses, investors, and communities through technology, innovation, and opportunity.",
+    url: 'https://afrisportconnect.com/about',
+    sameAs: [] as string[],
   },
   keywords: [
     'Afrisport Connect',
     'afrisportconnect',
     'afrisport connect',
+    'Lyndah Libese',
     'Africa football app',
     'African football super app',
     'football ecosystem Africa',
-    'Brian Maseno',
     'Nairobi football platform',
   ],
 } as const;

@@ -78,7 +78,15 @@
   margin-top: -0.35rem !important;
 }
 
-.about-card-founder .button {
+.about-grid-founder {
+  margin-top: 0;
+}
+
+.about-card-founder .about-heading {
+  max-width: 16ch;
+}
+
+.about-card-founder .about-lead {
   margin-top: 0.75rem;
 }
 
