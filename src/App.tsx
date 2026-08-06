@@ -26,6 +26,7 @@ import { DownloadPage } from './pages/DownloadPage';
 import { PricingPage } from './pages/PricingPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
+import { AboutPage } from './pages/AboutPage';
 
 /* Auth */
 import { LoginPage } from './auth/LoginPage';
@@ -127,6 +128,7 @@ export default function App() {
             <Route path="download" element={<DownloadPage />} />
             <Route path="privacy" element={<PrivacyPage />} />
             <Route path="terms" element={<TermsPage />} />
+            <Route path="about" element={<AboutPage />} />
           </Route>
 
           {/* ---------- Account ---------- */}

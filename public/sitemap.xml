@@ -6,6 +6,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://afrisportconnect.com/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://afrisportconnect.com/platform</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -104,5 +109,10 @@
     <loc>https://afrisportconnect.com/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://afrisportconnect.com/llms.txt</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
   </url>
 </urlset>

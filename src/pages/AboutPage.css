@@ -1,0 +1,138 @@
+.about-section {
+  padding: clamp(3.5rem, 8vw, 5.5rem) 0;
+}
+
+.about-section-alt {
+  background: linear-gradient(180deg, var(--ink) 0%, #0a1a30 100%);
+  color: var(--on-dark);
+}
+
+.about-section-alt .about-lead,
+.about-section-alt .muted {
+  color: var(--on-dark-muted);
+}
+
+.about-heading {
+  max-width: 18ch;
+  margin: 0.4rem 0 1rem;
+}
+
+.about-lead {
+  max-width: 62ch;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.about-grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.about-card {
+  padding: 1.5rem 1.6rem;
+  border-radius: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 40px rgba(11, 31, 58, 0.06);
+}
+
+.about-section-alt .about-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--on-dark-line);
+  box-shadow: none;
+  color: var(--on-dark);
+}
+
+.about-card h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+}
+
+.about-card p,
+.about-card li {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.about-section-alt .about-card p,
+.about-section-alt .about-card li {
+  color: var(--on-dark-muted);
+}
+
+.about-card ul {
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.about-card li {
+  margin-bottom: 0.35rem;
+}
+
+.about-role {
+  font-weight: 600;
+  color: var(--green) !important;
+  margin-top: -0.35rem !important;
+}
+
+.about-card-founder .button {
+  margin-top: 0.75rem;
+}
+
+.about-compare {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.about-compare > div {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: 16px;
+  border: 1px solid var(--gold-line);
+  background: rgba(212, 175, 55, 0.06);
+}
+
+.about-compare strong {
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.about-faq {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.about-faq-item {
+  padding: 1.25rem 1.4rem;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.about-faq-item h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+.about-faq-item p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.about-contact {
+  margin-top: 2rem;
+}
+
+.about-contact a {
+  color: var(--green);
+}

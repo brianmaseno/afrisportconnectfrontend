@@ -7,7 +7,9 @@ import { Impact } from '../components/Impact';
 import { Testimonial } from '../components/Testimonial';
 import { Download } from '../components/Download';
 import { Reveal } from '../components/Reveal';
+import { Seo } from '../components/Seo';
 import { media } from '../lib/media';
+import { BRAND } from '../lib/brand';
 import './HomePage.css';
 
 const destinations = [
@@ -84,6 +86,10 @@ const destinations = [
 export function HomePage() {
   return (
     <>
+      <Seo
+        description={`${BRAND.description} Founded by ${BRAND.founder.name}. Official site ${BRAND.domain}.`}
+        path="/"
+      />
       <Hero />
       <Ticker />
       <Vision />

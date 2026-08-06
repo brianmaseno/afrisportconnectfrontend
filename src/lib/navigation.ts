@@ -55,6 +55,7 @@ export const navGroups: NavGroup[] = [
       { to: '/governance', label: 'Governance', blurb: 'Board, committees and the PMO.' },
       { to: '/legal', label: 'Legal framework', blurb: 'Compliance across every market we enter.' },
       { to: '/investment', label: 'Investment', blurb: 'Funding, CapEx/OpEx and sustainability.' },
+      { to: '/about', label: 'About & founder', blurb: 'Who we are — Brian Maseno and Afrisport Connect.' },
     ],
   },
 ];

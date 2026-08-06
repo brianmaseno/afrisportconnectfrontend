@@ -73,7 +73,8 @@ export function Footer() {
 
           <nav className="footer-col" aria-label="Company">
             <h3>Company</h3>
-            <Link to="/impact">About us</Link>
+            <Link to="/about">About &amp; founder</Link>
+            <Link to="/impact">Impact &amp; ESG</Link>
             <a href="mailto:support@clubconnect.africa">Help centre</a>
             <a href="mailto:support@clubconnect.africa?subject=Afrisport%20Connect%20feedback">
               Feedback
@@ -108,11 +109,12 @@ export function Footer() {
         <div className="footer-bottom">
           <span>© {year} Afrisport Connect. All rights reserved.</span>
           <div className="footer-legal">
+            <Link to="/about">About</Link>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>
             <Link to="/legal">Legal framework</Link>
           </div>
-          <span className="footer-motto">Simple · Consistent · Discoverable · Inclusive</span>
+          <span className="footer-motto">Official site: afrisportconnect.com</span>
         </div>
       </div>
     </footer>
